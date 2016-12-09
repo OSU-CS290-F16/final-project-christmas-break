@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title>Inventory Management</title>
+
+ 
+
+    <link rel="stylesheet" href="style.css" media="screen">
+
+
+
+  </head>
+  <body>
+
+    <header>
+      <h1><a href="/"><i class="Main header"></i> WhIMSY </a></h1>
+      <span><h2><a href="/"><i class= "Sub-header"></i> Web Inventory Management SYstem </a></h1></span>
+
+      <nav>
+        <ul class="navbar-list">
+	  <li class="navbar-item"<button id="catalog-button">Catalog</button></li>
+	  <li class="navbar-item"<button id="count-button">Count List</button></li>
+	  <li class="navbar-item"<button id="inventory-select-button">Current Inventory Name</button></li>
+        </ul>
+      </nav>
+
+    </header>
+
+    <main>
+
+<div class = "middle">
+    
+	<div class="undo-button-container">
+        <button id="undo-button">Undo</button>
+      	</div>
+
+
+	<div class="multiplty-count-button-container">
+        <button id="multiply-count-button">Multiply</button>
+      	</div>
+	
+	
+
+      
+      <input type="text" placeholder="Enter an Item Number..." class="searchclass" required id="search-input">
+
+      <div class="add-count-button-container">
+        <button id="add-count-button">Add item</button>
+      </div>
+
+      <div class="search-button-container">
+        <button id="search-button">Search</button>
+      </div>
+</div>
+    </main>
+
+    <footer>
+      <div class="copyright">
+        Created by David Swope. 2016.
+      </div>
+    </footer>
+
+    <div id="modal-backdrop" class="hidden"></div>
+    <div id="add-item-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Add an Item to the catalog</h3>
+          <button type="button" class="modal-close-button">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="add-info">
+            <label for="add-item-number">Item number</label>
+            <input type="text" id="add-item-number">
+          </div>
+          <div class="add-info">
+            <label for="add-item-type">Item Type</label>
+            <input type="text" id="add-item-type">
+          </div>
+          <div class="add-info">
+            <label for="add-item-size">Size</label>
+            <input type="text" id="add-item-size">
+          </div>
+          <div class="add-info">
+            <label for="add-short-description">Short description</label>
+            <textarea id="add-short-description"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="modal-cancel-button">Cancel</button>
+          <button type="button" class="modal-accept-button">Add Item</button>
+        </div>
+      </div>
+    </div>
+
+
+ <div id="search-item-modal" class="hidden">
+      <div class="modal-dialog">
+
+        <div class="modal-header">
+          <h3>Search for a specific Item</h3>
+          <button type="button"button id="close-search-button" class="modal-close-button">&times; </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="add-info">
+            <label for="add-item-number">Item number</label>
+            <input type="text" id="search-item-number">
+          </div>
+          <div class="add-info">
+            <label for="add-item-type">Item Type</label>
+            <input type="text" id="search-item-type">
+          </div>
+          <div class="add-info">
+            <label for="add-item-size">Size</label>
+            <input type="text" id="search-item-size">
+          </div>
+          <div class="add-info">
+            <label for="add-short-description">Keywords</label>
+            <textarea id="search-short-description"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="search-cancel-button">Cancel</button>
+          <button type="button" class="modal-search-button">Search</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+ <div id="multiply-item-modal" class="multhidden">
+      <div class="modal-dialog" id="mult-box">
+
+        <div class="modal-header">
+          <h3>You have chosen to multiply, please enter your multiple</h3>
+
+        </div>
+
+        <div class="modal-body">
+          <div class="add-info">
+            <label for="add-short-description">Multiply X</label>
+            <textarea id="multiply-value"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="mult-cancel-button">Cancel</button>
+          <button type="button" class="mult-ok-button">OK</button>
+        </div>
+      </div>
+    </div>
+
+
+<div id="item-count-modal" class="counthidden">
+      <div class="modal-dialog" id="count-box">
+
+        <div class="modal-header">
+          <h3>This is a list of your items</h3>
+        </div>
+        <div class="modal-body">
+          <div class="add-info">
+            <ul id="catalog-list">
+	<div id="list-header"> ITEMS SCANNED: </div>
+	{{itemlist}}
+	</ul>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" button id="close-item-button" class="mult-ok-button">OK</button>
+        </div>
+      </div>
+    </div>
+
+
+
+<div id="catalog-modal" class="cataloghidden">
+      <div class="modal-dialog" id="count-box">
+        <div class="modal-header">
+          <h3>This is your full catalog</h3>
+        </div>
+        <div class="modal-body">
+          <div class="add-info">
+	<ul id="catalog-list">
+	<div id="list-header"> ITEMS IN INVENTORY: </div>
+	<li> WHATUP! </li>
+	<li> WHATUP YO! </li>
+	<li> WHATUP! </li>
+	<li> WHATUP YO! </li>
+	<li> WHATUP! </li>
+	<li> WHATUP YO! </li>
+	<li> WHATUP! </li>
+	<li> WHATUP YO! </li>
+	<li> WHATUP! </li>
+	<li> WHATUP YO! </li>
+	<li> WHATUP! </li>
+	<li> WHATUP YO! </li>
+	<li> WHATUP! </li>
+	<li> WHATUP YO! </li>
+	<li> WHATUP! </li>
+	<li> WHATUP YO! </li>
+	<li> WHATUP! </li>
+	<li> WHATUP YO! </li>
+	</ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" button id="close-catalog-button" class="mult-ok-button">OK</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </body>
+
+  <script src="index.js"></script>
+
+</html>

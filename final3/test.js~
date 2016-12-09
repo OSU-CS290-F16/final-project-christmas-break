@@ -1,0 +1,184 @@
+var path = require('path');
+var express = require('express');
+var staticDir = path.join(__dirname, 'public');
+var indexFilename = 'index.html';
+var notFoundFilename = '404.html';
+var port = process.env.PORT || 3000;
+var fs = require('fs');
+var app = express();
+var itemPage = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
+
+
+debugger;
+
+console.log('Hello World');
+var http = require('http');
+
+
+function placeInventory (req, response) {
+
+		var list = '<li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li>';
+
+		itemPage = itemPage.replace(new RegExp('{{itemlist}}', 'g'), list)
+	console.log("IN INVENTORY FUNCTION!");
+		response.end();
+
+}
+
+
+
+function handle (request, response) {
+debugger;
+
+
+app.get ('./item' , function (request, response) {
+
+	console.log("YOU IN THE ITEM MODAL!");
+	
+	
+		var list = '<li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li>';
+
+		itemPage = itemPage.replace(new RegExp('{{itemlist}}', 'g'), list)
+	console.log("IN INVENTORY FUNCTION!");
+
+		console.log("YOU IN THE END OF THE ITEM MODAL!");
+		response.end()
+
+});
+
+
+
+
+var filePath = '.' + request.url;
+var path = require('path');
+ 	response.writeHead(200)
+	console.log('request for:   ', filePath);
+//	response.end('YES');
+
+
+if (filePath == './') {
+	filePath += 'public/index.html';
+
+
+var contents = fs.readFileSync(filePath, 'utf8');
+response.writeHead(200, {'Content-Type': 'text/html'});	
+response.write(contents);
+	
+	response.end();
+
+		
+	}
+
+//ITEM CATCH
+
+
+if (filePath == './item') {
+		console.log("FOUND THE ITEM!");
+
+
+		
+		
+		var list = '<li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li>';
+                var xxx = "test it";
+                var zzz = xxx.replace('test', 'fix');
+		console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");		
+		console.log(zzz); 
+		console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");	
+		placeInventory(request, response);	
+		staticDir = staticDir.replace(new RegExp('{{itemlist}}', 'g'), list)
+
+
+		response.writeHead(200, {'Content-Type': 'text/html'});	
+		response.write(staticDir);
+		 
+}
+//CATALOG CATCH
+if (filePath == './catalog') {
+		console.log("FOUND THE CATALOG!");
+}
+
+
+
+if (filePath == './style.css') {
+	filePath = 'public/style.css';
+	
+	var contents = fs.readFileSync(filePath, 'utf8');
+	response.writeHead(200, {'Content-Type': 'text/css'});	
+	
+	//fs.readFile(public/
+	console.log('request processing for:   style.css', filePath);
+	response.write(contents);
+	
+	response.end();
+
+	}
+
+if (filePath == './index.js') {
+	filePath = 'public/index.js';
+	
+var contents =	fs.readFileSync(filePath, 'utf8');
+	response.writeHead(200, {'Content-Type': 'text/javascript'});	
+	
+	//fs.readFile(public/
+	console.log('request processing for:   index.js', filePath);
+	response.write(contents);
+	//response.writeHead
+	response.end();
+
+	}
+
+
+
+
+if (filePath != './') {
+	request = "./";
+	//location.href = './';
+filePath = 'public/index.html';
+		
+console.log("ATTEMPING TO HACK!");
+/*
+var contents = fs.readFileSync(filePath, 'utf8');
+response.writeHead(200, {'Content-Type': 'text/html'});	
+response.write(contents);
+*/	
+	response.writeHead(301, {Location: 'localhost:3000'});
+	response.end();
+
+		
+	}
+
+
+
+}
+
+
+app.get (function placeInventory (req, res) {
+		var content = "index";
+		
+		var list = '<li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li><li> WHATUP! </li><li> WHATUP YO! </li>';
+
+		content = content.replace(new RegExp('{{itemlist}}', 'g'), list);
+
+res.sendFile(fs.readFileSync(path.join (__dirname, 'public', 'index.html'), 'utf8')); 
+
+		console.log("PLACING INVENTORY LIST!");
+		
+			
+});
+
+
+
+//var htmlLocation = fs.readFileSync(path.join (__dirname, 'public', 'index.html'), 'utf8'); 
+//placeInventory ();
+
+
+
+var server = http.createServer(handle);
+
+server.listen(port, function(){
+
+console.log('== up and running on port#:     ', port);
+
+
+});
+
